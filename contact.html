@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Syndicat Local — Contact</title>
+  <title>CGT ArianeGroup Issac Brest Biscarosse — Contact</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -176,7 +176,9 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="index.html">SYNDICAT<span>•</span>LOCAL</a>
+    <a class="nav-logo" href="index.html">
+      <img src="logo.svg" alt="CGT ArianeGroup Issac Brest Biscarosse" style="height: 40px; vertical-align: middle;">
+    </a>
     <ul class="nav-links">
       <li><a href="index.html">Accueil</a></li>
       <li><a href="tracts.html">Tracts</a></li>
@@ -201,7 +203,7 @@
         <div>
           <p class="info-label">Email</p>
           <!-- MODIFIER : remplacez l'adresse email ci-dessous -->
-          <p class="info-value"><a href="mailto:contact@syndicat-local.fr">contact@syndicat-local.fr</a></p>
+          <p class="info-value"><a href="mailto:cgt.arianegroup@gmail.com">cgt.arianegroup@gmail.com</a></p>
         </div>
       </div>
 
@@ -221,8 +223,8 @@
           <!-- MODIFIER : remplacez l'adresse ci-dessous -->
           <p class="info-value">
             Bâtiment des représentants du personnel<br>
-            Site de [votre entreprise]<br>
-            [Ville, Code postal]
+            Site de ArianeGroup<br>
+            Issac / Brest / Biscarosse
           </p>
         </div>
       </div>
@@ -270,8 +272,8 @@
   </section>
 
   <footer>
-    <p>© 2026 Syndicat Local — Tous droits réservés</p>
-    <p><a href="mailto:contact@syndicat-local.fr">contact@syndicat-local.fr</a></p>
+    <p>© 2026 CGT ArianeGroup Issac Brest Biscarosse — Tous droits réservés</p>
+    <p><a href="mailto:cgt.arianegroup@gmail.com">cgt.arianegroup@gmail.com</a></p>
   </footer>
 
   <script>
@@ -281,7 +283,7 @@
       const sujet = document.getElementById('sujet').value;
       const message = document.getElementById('message').value;
       const corps = `Nom : ${nom}\nEmail : ${email}\n\n${message}`;
-      const mailtoLink = `mailto:contact@syndicat-local.fr?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
+      const mailtoLink = `mailto:cgt.arianegroup@gmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
       window.location.href = mailtoLink;
     }
   </script>
