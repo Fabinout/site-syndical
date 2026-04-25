@@ -141,16 +141,22 @@
 
   <section class="contact-section">
 
-    <!-- INFOS DE CONTACT — MODIFIER ICI -->
     <div class="infos">
       <h2 class="infos-title">Nos coordonnées</h2>
+
+      <div class="info-item">
+        <div class="info-icon">👤</div>
+        <div>
+          <p class="info-label">Contact référent</p>
+          <p class="info-value">David Da Silva</p>
+        </div>
+      </div>
 
       <div class="info-item">
         <div class="info-icon">✉️</div>
         <div>
           <p class="info-label">Email</p>
-          <!-- MODIFIER : remplacez l'adresse email ci-dessous -->
-          <p class="info-value"><a href="mailto:cgt.arianegroup@gmail.com">cgt.arianegroup@gmail.com</a></p>
+          <p class="info-value"><a href="mailto:david.da-silva@ariane.group">david.da-silva@ariane.group</a></p>
         </div>
       </div>
 
@@ -158,7 +164,7 @@
         <div class="info-icon">📞</div>
         <div>
           <p class="info-label">Téléphone</p>
-          <!-- MODIFIER : remplacez le numéro ci-dessous -->
+          <!-- TODO : remplacez le numéro ci-dessous -->
           <p class="info-value"><a href="tel:+33600000000">06 00 00 00 00</a></p>
         </div>
       </div>
@@ -167,7 +173,7 @@
         <div class="info-icon">📍</div>
         <div>
           <p class="info-label">Adresse</p>
-          <!-- MODIFIER : remplacez l'adresse ci-dessous -->
+          <!-- TODO : remplacez l'adresse ci-dessous -->
           <p class="info-value">
             Bâtiment des représentants du personnel<br>
             Site de ArianeGroup<br>
@@ -180,7 +186,7 @@
         <div class="info-icon">🕐</div>
         <div>
           <p class="info-label">Permanence</p>
-          <!-- MODIFIER : remplacez les horaires ci-dessous -->
+          <!-- TODO : remplacez les horaires ci-dessous -->
           <p class="info-value">
             Mardi et jeudi<br>
             12h00 – 13h30
@@ -191,9 +197,9 @@
     </div>
 
     <!-- FORMULAIRE DE CONTACT -->
+    <!-- Ce formulaire ouvre l'application mail de l'utilisateur -->
     <div class="form-wrap">
       <h2 class="form-title">Envoyer un message</h2>
-      <!-- Ce formulaire ouvre l'application mail de l'utilisateur -->
       <div>
         <div class="form-group">
           <label for="nom">Votre nom</label>
@@ -220,7 +226,7 @@
 
   <footer>
     <p>© 2026 CGT ArianeGroup Issac Brest Biscarosse — Tous droits réservés</p>
-    <p><a href="mailto:cgt.arianegroup@gmail.com">cgt.arianegroup@gmail.com</a></p>
+    <p><a href="mailto:david.da-silva@ariane.group">david.da-silva@ariane.group</a></p>
   </footer>
 
   <script>
@@ -230,7 +236,7 @@
       const sujet = document.getElementById('sujet').value;
       const message = document.getElementById('message').value;
       const corps = `Nom : ${nom}\nEmail : ${email}\n\n${message}`;
-      const mailtoLink = `mailto:cgt.arianegroup@gmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
+      const mailtoLink = `mailto:david.da-silva@ariane.group?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
       window.location.href = mailtoLink;
     }
   </script>
