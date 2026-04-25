@@ -7,10 +7,11 @@ Ce guide explique comment maintenir votre site sans aucune connaissance en code.
 ## Structure des fichiers
 
 ```
-site-syndicat/
+site-syndical/
 ├── index.html        → Page d'accueil
 ├── tracts.html       → Page des tracts
 ├── contact.html      → Page de contact
+├── style.css         → Styles partagés (NOUVEAU)
 ├── tracts/           → DOSSIER où déposer vos PDF
 │   └── exemple.pdf
 └── README.md         → Ce guide
@@ -88,17 +89,10 @@ Le site se met à jour automatiquement en 1-2 minutes.
 
 ---
 
-## Personnaliser le nom du syndicat
-
-Cherchez `SYNDICAT•LOCAL` dans chaque fichier HTML et remplacez par votre nom réel.
-Cherchez aussi `Syndicat Local` (dans les titres et le footer) et faites de même.
-
----
-
 ## Domaine personnalisé (optionnel, ~12€/an)
 
 Si vous souhaitez une adresse comme `syndicat-xyz.fr` au lieu de `github.io` :
-1. Achetez un domaine sur **gandi.net** ou **o2switch.fr**
+1. Achetez un domaine sur **gandi.net**, OVH, ou **o2switch.fr**
 2. Dans GitHub → Settings → Pages → "Custom domain" → entrez votre domaine
 3. Suivez les instructions de votre registrar pour configurer le DNS
 

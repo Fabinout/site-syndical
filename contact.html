@@ -6,49 +6,9 @@
   <title>CGT ArianeGroup Issac Brest Biscarosse — Contact</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root {
-      --rouge: #E8233A;
-      --noir: #0D0D0D;
-      --blanc: #F5F3EE;
-      --gris: #2A2A2A;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--noir); color: var(--blanc); min-height: 100vh;
-    }
-
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 3rem;
-      background: rgba(13,13,13,0.85); backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(232,35,58,0.2);
-    }
-    .nav-logo {
-      font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800;
-      color: var(--blanc); text-decoration: none; letter-spacing: 0.05em;
-    }
-    .nav-logo span { color: var(--rouge); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      color: rgba(245,243,238,0.65); text-decoration: none;
-      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.08em;
-      text-transform: uppercase; transition: color 0.2s; position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0;
-      width: 0; height: 2px; background: var(--rouge); transition: width 0.25s ease;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--blanc); }
-    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-
-    .page-header {
-      padding: 8rem 3rem 4rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      position: relative; overflow: hidden;
-    }
+    /* PAGE HEADER SPECIFIC */
     .page-header::before {
       content: '';
       position: absolute; top: -30%; left: -5%;
@@ -155,21 +115,8 @@
       color: rgba(245,243,238,0.3); line-height: 1.6;
     }
 
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 2.5rem 3rem;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    footer p { font-size: 0.82rem; color: rgba(245,243,238,0.35); }
-    footer a { color: var(--rouge); text-decoration: none; }
-
     @media (max-width: 800px) {
       .contact-section { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.2rem; }
-      nav { padding: 1rem 1.2rem; }
-      .nav-links { gap: 1.2rem; }
-      .page-header { padding: 7rem 1.2rem 3rem; }
-      footer { padding: 2rem 1.2rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
