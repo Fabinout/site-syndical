@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syndicat Local — Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rouge: #E8233A;
+      --noir: #0D0D0D;
+      --blanc: #F5F3EE;
+      --gris: #2A2A2A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--noir); color: var(--blanc); min-height: 100vh;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(13,13,13,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232,35,58,0.2);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800;
+      color: var(--blanc); text-decoration: none; letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--rouge); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(245,243,238,0.65); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: var(--rouge); transition: width 0.25s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--blanc); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    .page-header {
+      padding: 8rem 3rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; top: -30%; left: -5%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232,35,58,0.09) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+    .page-eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--rouge); margin-bottom: 0.8rem;
+    }
+    .page-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; line-height: 1;
+    }
+    .page-desc {
+      margin-top: 1.2rem; font-size: 1rem; font-weight: 300;
+      color: rgba(245,243,238,0.55); max-width: 480px; line-height: 1.7;
+    }
+
+    /* CONTACT LAYOUT */
+    .contact-section {
+      padding: 5rem 3rem;
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    }
+
+    /* INFOS BLOC */
+    .infos-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem; font-weight: 800; margin-bottom: 2.5rem;
+    }
+
+    /* =====================================================
+       POUR MODIFIER LES INFOS DE CONTACT :
+       Cherchez les balises <span class="info-value"> ci-dessous
+       et remplacez le texte entre les balises.
+       ===================================================== */
+
+    .info-item {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .info-item:last-child { border-bottom: none; }
+    .info-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: rgba(232,35,58,0.12);
+      border: 1px solid rgba(232,35,58,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    }
+    .info-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--rouge); margin-bottom: 0.3rem;
+    }
+    .info-value {
+      font-size: 1rem; font-weight: 400; line-height: 1.5;
+      color: var(--blanc);
+    }
+    .info-value a { color: var(--blanc); text-decoration: none; border-bottom: 1px solid rgba(232,35,58,0.4); padding-bottom: 1px; }
+    .info-value a:hover { color: var(--rouge); }
+
+    /* FORM */
+    .form-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem; font-weight: 800; margin-bottom: 2.5rem;
+    }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label {
+      display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(245,243,238,0.5); margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%; background: var(--gris);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--blanc); font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; padding: 0.85rem 1rem;
+      outline: none; transition: border-color 0.2s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: rgba(232,35,58,0.5); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(245,243,238,0.25); }
+
+    .btn-submit {
+      display: inline-block; padding: 0.9rem 2.5rem;
+      background: var(--rouge); color: var(--blanc);
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-submit:hover { background: #c41830; transform: translateY(-2px); }
+
+    .form-note {
+      margin-top: 1rem; font-size: 0.8rem;
+      color: rgba(245,243,238,0.3); line-height: 1.6;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.82rem; color: rgba(245,243,238,0.35); }
+    footer a { color: var(--rouge); text-decoration: none; }
+
+    @media (max-width: 800px) {
+      .contact-section { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.2rem; }
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .page-header { padding: 7rem 1.2rem 3rem; }
+      footer { padding: 2rem 1.2rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">SYNDICAT<span>•</span>LOCAL</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="tracts.html">Tracts</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <p class="page-eyebrow">📬 Nous joindre</p>
+    <h1 class="page-title">Contact</h1>
+    <p class="page-desc">Une question, un problème au travail, envie de rejoindre le syndicat ? Écrivez-nous.</p>
+  </header>
+
+  <section class="contact-section">
+
+    <!-- INFOS DE CONTACT — MODIFIER ICI -->
+    <div class="infos">
+      <h2 class="infos-title">Nos coordonnées</h2>
+
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div>
+          <p class="info-label">Email</p>
+          <!-- MODIFIER : remplacez l'adresse email ci-dessous -->
+          <p class="info-value"><a href="mailto:contact@syndicat-local.fr">contact@syndicat-local.fr</a></p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div>
+          <p class="info-label">Téléphone</p>
+          <!-- MODIFIER : remplacez le numéro ci-dessous -->
+          <p class="info-value"><a href="tel:+33600000000">06 00 00 00 00</a></p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div>
+          <p class="info-label">Adresse</p>
+          <!-- MODIFIER : remplacez l'adresse ci-dessous -->
+          <p class="info-value">
+            Bâtiment des représentants du personnel<br>
+            Site de [votre entreprise]<br>
+            [Ville, Code postal]
+          </p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div>
+          <p class="info-label">Permanence</p>
+          <!-- MODIFIER : remplacez les horaires ci-dessous -->
+          <p class="info-value">
+            Mardi et jeudi<br>
+            12h00 – 13h30
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FORMULAIRE DE CONTACT -->
+    <div class="form-wrap">
+      <h2 class="form-title">Envoyer un message</h2>
+      <!-- Ce formulaire ouvre l'application mail de l'utilisateur -->
+      <div>
+        <div class="form-group">
+          <label for="nom">Votre nom</label>
+          <input type="text" id="nom" placeholder="Prénom Nom">
+        </div>
+        <div class="form-group">
+          <label for="email">Votre email</label>
+          <input type="email" id="email" placeholder="votre@email.fr">
+        </div>
+        <div class="form-group">
+          <label for="sujet">Sujet</label>
+          <input type="text" id="sujet" placeholder="Ex : Question sur mes droits">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Décrivez votre situation ou votre question…"></textarea>
+        </div>
+        <button class="btn-submit" onclick="envoyerMail()">Envoyer →</button>
+        <p class="form-note">Ce bouton ouvrira votre application mail avec le message pré-rempli.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>© 2026 Syndicat Local — Tous droits réservés</p>
+    <p><a href="mailto:contact@syndicat-local.fr">contact@syndicat-local.fr</a></p>
+  </footer>
+
+  <script>
+    function envoyerMail() {
+      const nom = document.getElementById('nom').value;
+      const email = document.getElementById('email').value;
+      const sujet = document.getElementById('sujet').value;
+      const message = document.getElementById('message').value;
+      const corps = `Nom : ${nom}\nEmail : ${email}\n\n${message}`;
+      const mailtoLink = `mailto:contact@syndicat-local.fr?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
+      window.location.href = mailtoLink;
+    }
+  </script>
+
+</body>
+</html>

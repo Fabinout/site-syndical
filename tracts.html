@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syndicat Local — Tracts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rouge: #E8233A;
+      --noir: #0D0D0D;
+      --blanc: #F5F3EE;
+      --gris: #2A2A2A;
+      --gris-clair: #1A1A1A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--noir); color: var(--blanc);
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232,35,58,0.2);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800;
+      color: var(--blanc); text-decoration: none; letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--rouge); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(245,243,238,0.65); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: var(--rouge); transition: width 0.25s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--blanc); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 8rem 3rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; top: -30%; right: -5%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232,35,58,0.1) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+    .page-eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--rouge); margin-bottom: 0.8rem;
+    }
+    .page-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; line-height: 1;
+    }
+    .page-desc {
+      margin-top: 1.2rem; font-size: 1rem; font-weight: 300;
+      color: rgba(245,243,238,0.55); max-width: 480px; line-height: 1.7;
+    }
+
+    /* TRACTS GRID */
+    .tracts-section {
+      padding: 4rem 3rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    /* ========================================================
+       POUR AJOUTER UN TRACT :
+       Copiez un bloc <article class="tract-card"> ci-dessous,
+       changez la date, le titre, le résumé, et le lien PDF.
+       ======================================================== */
+
+    .tracts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tract-card {
+      background: var(--gris);
+      border: 1px solid rgba(255,255,255,0.06);
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+      transition: transform 0.25s, border-color 0.25s;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .tract-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(232,35,58,0.35);
+    }
+    .tract-thumb {
+      height: 160px;
+      background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+      position: relative; overflow: hidden;
+    }
+    .tract-thumb::after {
+      content: 'PDF';
+      position: absolute; top: 0.7rem; right: 0.7rem;
+      background: var(--rouge); color: white;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+      padding: 0.2rem 0.5rem;
+    }
+    .tract-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .tract-date {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--rouge); margin-bottom: 0.6rem;
+    }
+    .tract-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700; line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+    .tract-desc {
+      font-size: 0.88rem; line-height: 1.6;
+      color: rgba(245,243,238,0.55); flex: 1;
+      margin-bottom: 1.2rem;
+    }
+    .tract-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--blanc); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+      border-bottom: 1px solid rgba(232,35,58,0.4);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+      width: fit-content;
+    }
+    .tract-link:hover { color: var(--rouge); border-color: var(--rouge); }
+
+    /* EMPTY STATE */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center; padding: 5rem 2rem;
+      color: rgba(245,243,238,0.3);
+    }
+    .empty-state .big-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .empty-state p { font-size: 1rem; line-height: 1.7; }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.82rem; color: rgba(245,243,238,0.35); }
+    footer a { color: var(--rouge); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .page-header, .tracts-section { padding-left: 1.2rem; padding-right: 1.2rem; }
+      footer { padding: 2rem 1.2rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">SYNDICAT<span>•</span>LOCAL</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="tracts.html" class="active">Tracts</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <p class="page-eyebrow">📰 Publications</p>
+    <h1 class="page-title">Nos tracts</h1>
+    <p class="page-desc">Retrouvez ici l'ensemble de nos publications. Chaque semaine, nous informons les travailleurs de l'actualité sociale.</p>
+  </header>
+
+  <section class="tracts-section">
+    <div class="tracts-grid">
+
+
+      <!-- bloc à dupliquer pour chaque tract -->
+
+      <article class="tract-card">
+        <div class="tract-thumb">📄</div>
+        <div class="tract-body">
+          <p class="tract-date">Semaine du 25 avril 2026</p>
+          <h2 class="tract-title">Montage de serre</h2>
+          <p class="tract-desc">blablablabla</p>
+          <a class="tract-link" href="tracts/20260425.pdf" target="_blank">
+            Télécharger le PDF ↓
+          </a>
+        </div>
+      </article>
+
+      <!-- Ajoutez vos prochains tracts ici en copiant le bloc ci-dessus -->
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Syndicat Local — Tous droits réservés</p>
+    <p><a href="contact.html">contact@syndicat-local.fr</a></p>
+  </footer>
+
+</body>
+</html>

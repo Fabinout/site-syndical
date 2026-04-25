@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syndicat Local — Accueil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rouge: #E8233A;
+      --noir: #0D0D0D;
+      --blanc: #F5F3EE;
+      --gris: #2A2A2A;
+      --accent: #FF6B35;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--noir);
+      color: var(--blanc);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232,35,58,0.2);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 800;
+      color: var(--blanc); text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--rouge); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(245,243,238,0.65); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: var(--rouge);
+      transition: width 0.25s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--blanc); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -20%; right: -10%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(232,35,58,0.12) 0%, transparent 65%);
+      border-radius: 50%;
+      animation: pulse 6s ease-in-out infinite;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 5%; left: -5%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,107,53,0.07) 0%, transparent 65%);
+      border-radius: 50%;
+      animation: pulse 8s ease-in-out infinite reverse;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.7; }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--rouge);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 800; line-height: 0.95;
+      max-width: 800px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero-title em {
+      font-style: normal; color: var(--rouge);
+      display: block;
+    }
+    .hero-desc {
+      margin-top: 2rem;
+      font-size: 1.1rem; font-weight: 300;
+      line-height: 1.7; max-width: 520px;
+      color: rgba(245,243,238,0.7);
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .btn-primary {
+      display: inline-block; padding: 0.9rem 2.2rem;
+      background: var(--rouge); color: var(--blanc);
+      text-decoration: none; font-weight: 500; font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #c41830; transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-block; padding: 0.9rem 2.2rem;
+      border: 1px solid rgba(245,243,238,0.25); color: var(--blanc);
+      text-decoration: none; font-weight: 400; font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--rouge); transform: translateY(-2px); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid rgba(232,35,58,0.25);
+      border-bottom: 1px solid rgba(232,35,58,0.25);
+      padding: 0.9rem 0;
+      background: rgba(232,35,58,0.05);
+    }
+    .marquee-track {
+      display: flex; gap: 3rem;
+      animation: marquee 18s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(245,243,238,0.35);
+      flex-shrink: 0;
+    }
+    .marquee-item span { color: var(--rouge); margin-right: 3rem; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* CARDS SECTION */
+    .section {
+      padding: 6rem 3rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--rouge);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--gris);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem;
+      position: relative; overflow: hidden;
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+      transition: transform 0.25s, border-color 0.25s;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--rouge), transparent);
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(232,35,58,0.3); }
+    .card:hover::before { opacity: 1; }
+    .card-icon {
+      font-size: 2rem; margin-bottom: 1.2rem;
+      display: block;
+    }
+    .card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem; font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+    .card p {
+      font-size: 0.9rem; line-height: 1.7;
+      color: rgba(245,243,238,0.6);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.82rem; color: rgba(245,243,238,0.35); }
+    footer a { color: var(--rouge); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { padding: 7rem 1.2rem 3rem; }
+      .section { padding: 4rem 1.2rem; }
+      footer { padding: 2rem 1.2rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">SYNDICAT<span>•</span>LOCAL</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="tracts.html">Tracts</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-eyebrow">✊ Section locale — depuis 1972</p>
+    <h1 class="hero-title">
+      Ensemble,
+      <em>plus forts.</em>
+    </h1>
+    <p class="hero-desc">
+      Nous défendons les droits des travailleurs au quotidien. Retrouvez ici nos tracts, nos actualités et comment nous rejoindre ou nous contacter.
+    </p>
+    <div class="hero-cta">
+      <a href="tracts.html" class="btn-primary">Voir nos tracts →</a>
+      <a href="contact.html" class="btn-secondary">Nous contacter</a>
+    </div>
+  </section>
+
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item"><span>✊</span>SOLIDARITÉ</span>
+      <span class="marquee-item"><span>⚡</span>ACTION</span>
+      <span class="marquee-item"><span>🛡</span>PROTECTION</span>
+      <span class="marquee-item"><span>📣</span>MOBILISATION</span>
+      <span class="marquee-item"><span>✊</span>SOLIDARITÉ</span>
+      <span class="marquee-item"><span>⚡</span>ACTION</span>
+      <span class="marquee-item"><span>🛡</span>PROTECTION</span>
+      <span class="marquee-item"><span>📣</span>MOBILISATION</span>
+      <span class="marquee-item"><span>✊</span>SOLIDARITÉ</span>
+      <span class="marquee-item"><span>⚡</span>ACTION</span>
+      <span class="marquee-item"><span>🛡</span>PROTECTION</span>
+      <span class="marquee-item"><span>📣</span>MOBILISATION</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Ce que nous faisons</p>
+    <h2 class="section-title">Notre engagement,<br>chaque jour</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">📋</span>
+        <h3>Défense des droits</h3>
+        <p>Accompagnement individuel, négociation collective, présence en réunions. Nous sommes là quand vous en avez besoin.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📰</span>
+        <h3>Tracts & informations</h3>
+        <p>Chaque semaine, nous publions des tracts pour vous tenir informés des dernières actualités sociales et de nos actions.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🤝</span>
+        <h3>Rejoindre le syndicat</h3>
+        <p>Adhérer, c'est peser collectivement. Plus nous sommes nombreux, plus notre voix compte dans les négociations.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Syndicat Local — Tous droits réservés</p>
+    <p><a href="contact.html">contact@syndicat-local.fr</a></p>
+  </footer>
+
+</body>
+</html>
