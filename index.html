@@ -132,6 +132,82 @@
       color: rgba(245,243,238,0.6);
     }
 
+    /* RSS SECTION */
+    .rss-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .rss-feed {
+      background: var(--gris);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 1.8rem;
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+    }
+    .rss-feed::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--rouge), transparent);
+    }
+    .rss-feed-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .rss-feed-header img {
+      width: 24px; height: 24px; border-radius: 4px;
+    }
+    .rss-feed-header h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--blanc);
+    }
+    .rss-item {
+      display: block;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .rss-item:last-child { border-bottom: none; }
+    .rss-item:hover {
+      background: rgba(232,35,58,0.04);
+      margin: 0 -1.8rem;
+      padding-left: 1.8rem;
+      padding-right: 1.8rem;
+    }
+    .rss-item-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: rgba(245,243,238,0.85);
+      line-height: 1.45;
+      display: block;
+      transition: color 0.2s;
+    }
+    .rss-item:hover .rss-item-title { color: var(--rouge); }
+    .rss-item-date {
+      font-size: 0.75rem;
+      color: rgba(245,243,238,0.35);
+      margin-top: 0.3rem;
+      display: block;
+    }
+    .rss-loading, .rss-error {
+      text-align: center;
+      padding: 3rem;
+      color: rgba(245,243,238,0.4);
+      font-size: 0.9rem;
+      grid-column: 1 / -1;
+    }
+    .rss-error { color: var(--rouge); }
+
+    @media (max-width: 900px) {
+      .rss-grid { grid-template-columns: 1fr; }
+    }
     @media (max-width: 640px) {
       .section { padding: 4rem 1.2rem; }
     }
@@ -217,10 +293,87 @@
     </div>
   </div>
 
+  <div class="section rss-section">
+    <p class="section-label">Sur le web</p>
+    <h2 class="section-title">Actualités syndicales</h2>
+    <div class="rss-grid" id="rss-grid">
+      <div class="rss-loading">Chargement des actualités...</div>
+    </div>
+  </div>
+
   <footer>
     <p>© 2026 CGT ArianeGroup Issac Brest Biscarosse — Tous droits réservés</p>
     <p><a href="contact.html">david.da-silva@ariane.group</a></p>
   </footer>
+
+  <script>
+  (function() {
+    const feeds = [
+      { url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.cgt.fr/rss.xml', title: 'Site National CGT', logo: 'https://www.cgt.fr/themes/bluedrop/svg/logo.svg' },
+      { url: 'https://api.rss2json.com/v1/api.json?rss_url=http://feeds.feedburner.com/UGICT-CGT-ActusGenerales', title: 'Site National UGICT' },
+      { url: 'https://api.rss2json.com/v1/api.json?rss_url=https://ftm-cgt.fr/feed/', title: 'Metallurgie CGT' }
+    ];
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      if (isNaN(d)) return '';
+      return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    async function loadFeeds() {
+      const grid = document.getElementById('rss-grid');
+      grid.innerHTML = '';
+
+      const results = await Promise.allSettled(
+        feeds.map(f => fetch(f.url).then(r => r.json()))
+      );
+
+      let hasAny = false;
+      results.forEach((result, idx) => {
+        if (result.status === 'fulfilled' && result.value.status === 'ok') {
+          hasAny = true;
+          const data = result.value;
+          const feed = data.feed;
+          const items = data.items.slice(0, 4);
+
+          const col = document.createElement('div');
+          col.className = 'rss-feed';
+
+          const logo = feeds[idx].logo || feed.image;
+          const imgHtml = logo ? `<img src="${logo}" alt="" loading="lazy">` : '';
+          col.innerHTML = `
+            <div class="rss-feed-header">
+              ${imgHtml}
+              <h3>${feeds[idx].title}</h3>
+            </div>
+          `;
+
+          items.forEach(item => {
+            const a = document.createElement('a');
+            a.className = 'rss-item';
+            a.href = item.link;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.innerHTML = `
+              <span class="rss-item-title">${item.title}</span>
+              <span class="rss-item-date">${formatDate(item.pubDate)}</span>
+            `;
+            col.appendChild(a);
+          });
+
+          grid.appendChild(col);
+        }
+      });
+
+      if (!hasAny) {
+        grid.innerHTML = '<div class="rss-error">Impossible de charger les actualités pour le moment.</div>';
+      }
+    }
+
+    loadFeeds();
+  })();
+  </script>
 
 </body>
 </html>
