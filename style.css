@@ -48,6 +48,23 @@ nav {
 .nav-links a:hover, .nav-links a.active { color: var(--blanc); }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--blanc);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
 /* PAGE HEADERS & HERO BASE */
 .hero, .page-header {
   padding: 8rem 3rem 4rem;
@@ -99,7 +116,21 @@ footer a { color: var(--rouge); text-decoration: none; }
 /* RESPONSIVE */
 @media (max-width: 640px) {
   nav { padding: 1rem 1.2rem; }
-  .nav-links { gap: 1.2rem; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(12px);
+    padding: 1.5rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid rgba(232,35,58,0.2);
+  }
+  .nav-links.open { display: flex; }
   .hero, .page-header { padding-left: 1.2rem; padding-right: 1.2rem; padding-top: 7rem; }
   footer { padding: 2rem 1.2rem; flex-direction: column; align-items: flex-start; }
 }
