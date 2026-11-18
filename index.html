@@ -1,391 +1,209 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CGT ArianeGroup Issac Brest Biscarosse — Accueil</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* HERO SPECIFIC */
-    .hero::before {
-      content: '';
-      position: absolute; top: -20%; right: -10%; z-index: -1;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(232,35,58,0.12) 0%, transparent 65%);
-      border-radius: 50%;
-      animation: pulse 6s ease-in-out infinite;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: 5%; left: -5%; z-index: -1;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(255,107,53,0.07) 0%, transparent 65%);
-      border-radius: 50%;
-      animation: pulse 8s ease-in-out infinite reverse;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--rouge);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.7s ease both;
-    }
-    .hero-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(3.5rem, 8vw, 7rem);
-      font-weight: 800; line-height: 0.95;
-      max-width: 800px;
-      animation: fadeUp 0.7s 0.1s ease both;
-    }
-    .hero-title em {
-      font-style: normal; color: var(--rouge);
-      display: block;
-    }
-    .hero-desc {
-      margin-top: 2rem;
-      font-size: 1.1rem; font-weight: 300;
-      line-height: 1.7; max-width: 520px;
-      color: rgba(245,243,238,0.7);
-      animation: fadeUp 0.7s 0.2s ease both;
-    }
-    .hero-cta {
-      margin-top: 3rem;
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      animation: fadeUp 0.7s 0.3s ease both;
-    }
-
-    /* MARQUEE */
-    .marquee-wrap {
-      overflow: hidden;
-      border-top: 1px solid rgba(232,35,58,0.25);
-      border-bottom: 1px solid rgba(232,35,58,0.25);
-      padding: 0.9rem 0;
-      background: rgba(232,35,58,0.05);
-    }
-    .marquee-track {
-      display: flex; gap: 3rem;
-      animation: marquee 18s linear infinite;
-      white-space: nowrap;
-    }
-    .marquee-item {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
-      text-transform: uppercase; color: rgba(245,243,238,0.35);
-      flex-shrink: 0;
-    }
-    .marquee-item span { color: var(--rouge); margin-right: 3rem; }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* CARDS SECTION */
-    .section {
-      padding: 6rem 3rem;
-      max-width: 1200px; margin: 0 auto;
-    }
-    .section-label {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
-      text-transform: uppercase; color: var(--rouge);
-      margin-bottom: 0.8rem;
-    }
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800; line-height: 1.1;
-      margin-bottom: 3rem;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
-      background: var(--gris);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 2rem;
-      position: relative; overflow: hidden;
-      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
-      transition: transform 0.25s, border-color 0.25s;
-    }
-    .card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--rouge), transparent);
-      opacity: 0; transition: opacity 0.25s;
-    }
-    .card:hover { transform: translateY(-4px); border-color: rgba(232,35,58,0.3); }
-    .card:hover::before { opacity: 1; }
-    .card-icon {
-      font-size: 2rem; margin-bottom: 1.2rem;
-      display: block;
-    }
-    .card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.2rem; font-weight: 700;
-      margin-bottom: 0.7rem;
-    }
-    .card p {
-      font-size: 0.9rem; line-height: 1.7;
-      color: rgba(245,243,238,0.6);
-    }
-
-    /* RSS SECTION */
-    .rss-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    .rss-feed {
-      background: var(--gris);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 1.8rem;
-      position: relative;
-      overflow: hidden;
-      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
-    }
-    .rss-feed::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--rouge), transparent);
-    }
-    .rss-feed-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .rss-feed-header img {
-      width: 24px; height: 24px; border-radius: 4px;
-    }
-    .rss-feed-header h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem; font-weight: 700;
-      color: var(--blanc);
-    }
-    .rss-item {
-      display: block;
-      padding: 0.7rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .rss-item:last-child { border-bottom: none; }
-    .rss-item:hover {
-      background: rgba(232,35,58,0.04);
-      margin: 0 -1.8rem;
-      padding-left: 1.8rem;
-      padding-right: 1.8rem;
-    }
-    .rss-item-title {
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: rgba(245,243,238,0.85);
-      line-height: 1.45;
-      display: block;
-      transition: color 0.2s;
-    }
-    .rss-item:hover .rss-item-title { color: var(--rouge); }
-    .rss-item-date {
-      font-size: 0.75rem;
-      color: rgba(245,243,238,0.35);
-      margin-top: 0.3rem;
-      display: block;
-    }
-    .rss-loading, .rss-error {
-      text-align: center;
-      padding: 3rem;
-      color: rgba(245,243,238,0.4);
-      font-size: 0.9rem;
-      grid-column: 1 / -1;
-    }
-    .rss-error { color: var(--rouge); }
-
-    @media (max-width: 900px) {
-      .rss-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 640px) {
-      .section { padding: 4rem 1.2rem; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Site CGT ArianeGroup — choisissons le design ensemble</title>
+<style>
+  :root { --ink:#1d1d1d; --muted:#5a5a5a; --line:#d9d6cf; --bg:#f6f4ef; --card:#ffffff; --accent:#b0102a; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a { color: var(--accent); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 56px 0 32px; }
+  h1 { font-size: clamp(30px, 4.5vw, 46px); line-height: 1.1; margin: 0 0 16px; }
+  .intro { max-width: 720px; font-size: 19px; color: #333; margin: 0; }
+  .steps { display:flex; flex-wrap:wrap; gap:12px 32px; margin:24px 0 0; padding:0; list-style:none; color:var(--muted); font-size:16px; }
+  .steps b { color: var(--ink); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px; padding: 16px 0 56px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
+  .thumb { display:block; position:relative; height:280px; overflow:hidden; border-bottom:1px solid var(--line); background:#eee; }
+  .thumb iframe { position:absolute; top:0; left:0; width:1280px; height:1000px; border:0; transform:scale(0.3); transform-origin:0 0; pointer-events:none; }
+  @media (min-width: 1100px) { .thumb iframe { transform: scale(0.29); } }
+  .card-body { padding:20px 22px 24px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .card h2 { margin:0; font-size:24px; }
+  .card p { margin:0; color:#333; }
+  .links { display:flex; flex-wrap:wrap; gap:8px; margin-top:auto; padding-top:8px; }
+  .links a { display:inline-block; padding:10px 14px; border:1px solid var(--ink); border-radius:4px; color:var(--ink); text-decoration:none; font-weight:600; font-size:15px; }
+  .links a.main { background:var(--ink); color:#fff; }
+  .links a:hover { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .note { background:#fff8e0; border:1px solid #ecd98a; border-radius:6px; padding:14px 18px; font-size:15px; color:#4a4020; margin: 0 0 56px; }
+  #avis { background:var(--card); border-top:1px solid var(--line); padding:56px 0 80px; }
+  #avis h2 { font-size:32px; margin:0 0 8px; }
+  form { max-width:760px; display:flex; flex-direction:column; gap:22px; margin-top:24px; }
+  fieldset { border:1px solid var(--line); border-radius:6px; padding:16px 20px 20px; margin:0; }
+  legend { font-weight:700; padding:0 6px; }
+  .choices { display:flex; flex-wrap:wrap; gap:10px 24px; margin-top:6px; }
+  .choices label { display:flex; align-items:center; gap:8px; min-height:44px; cursor:pointer; }
+  .choices input { width:20px; height:20px; accent-color: var(--accent); }
+  label.field { display:flex; flex-direction:column; gap:6px; font-weight:700; }
+  label.field span.hint { font-weight:400; color:var(--muted); font-size:15px; }
+  input[type=text], textarea { font:inherit; padding:12px; border:1px solid #9a968e; border-radius:4px; background:#fff; color:var(--ink); }
+  textarea { resize:vertical; }
+  .actions { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+  button { font:inherit; font-weight:700; padding:14px 22px; border-radius:4px; cursor:pointer; border:2px solid var(--ink); background:#fff; color:var(--ink); }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  #status { margin:0; font-size:15px; color:var(--muted); min-height:1.6em; }
+  footer { padding:24px 0 40px; color:var(--muted); font-size:14px; }
+</style>
 </head>
 <body>
 
-  <nav>
-    <a class="nav-logo" href="index.html">
-      <svg width="350" height="75" viewBox="0 0 350 75" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 40px; vertical-align: middle;">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 94H108V0H0.5V94Z" fill="#F03E3E"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.869 49.498C17.197 50.5579 16.4539 51.7242 14.9682 52.7843C13.5535 53.7741 11.7495 54.4454 9.66194 54.4454C6.12475 54.4454 0.5 52.3252 0.5 44.7978C0.5 39.4264 3.61282 34.903 9.76826 34.903C11.8201 34.903 15.3224 35.4686 17.6566 39.3202L13.6242 41.6175C13.3057 40.9459 12.9522 40.31 12.0673 39.6738C11.5371 39.3202 10.8646 39.0379 10.0159 39.0379C7.07981 39.0379 6.08931 42.395 6.08931 44.6212C6.08931 47.0596 7.29222 50.134 10.1926 50.134C10.4759 50.134 11.8201 50.134 12.9522 48.8621C13.4118 48.3317 13.5887 47.9075 13.7655 47.3778L17.869 49.498Z" fill="#FEFEFE"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M23.4584 44.0911C23.4584 45.6459 23.5645 48.8621 26.9249 48.8621C29.684 48.8621 30.3208 46.7058 30.3208 44.0911C30.3208 43.2075 30.2501 41.3699 29.6488 40.4866C29.224 39.815 28.2339 39.0726 26.6773 39.1437C24.0949 39.2497 23.4584 41.4759 23.4584 44.0911ZM30.3559 51.406C29.2945 52.1132 27.9857 52.9609 25.4742 52.9609C23.9533 52.9609 22.4675 52.5724 21.2648 51.7594C18.7886 50.1691 17.8335 47.307 17.8335 44.1265C17.8335 40.4158 19.5667 35.0796 25.6867 35.0796C28.5164 35.0796 29.8252 36.3163 30.639 37.0936V35.3622H35.733V53.1025C35.6623 55.1168 35.5915 57.4846 32.9026 59.0397C31.0279 60.1704 28.2692 60.4531 26.6065 60.4531C22.9276 60.4531 20.5222 59.1808 19.5312 58.1564C18.0813 56.7072 18.1166 54.8344 18.1166 53.8447H23.7409C23.8115 54.6574 23.8826 55.8237 25.3329 56.495C25.6867 56.6718 26.2173 56.8484 27.0663 56.8484C30.3559 56.8484 30.3559 54.905 30.3559 53.3849V51.406Z" fill="#FEFEFE"/>
-    <circle cx="25" cy="44" r="7" fill="white"/>
-    <g transform="translate(18.5, 39) scale(0.29)">
-      <path d="M43.619 6.40069C44.7937 6.40069 45.7459 5.42271 45.7459 4.21632C45.7459 3.00993 44.7937 2.03195 43.619 2.03195C42.4444 2.03195 41.4922 3.00993 41.4922 4.21632C41.4922 5.42271 42.4444 6.40069 43.619 6.40069Z" fill="#F03E3E"/>
-      <path d="M55.5902 5.24085C54.8756 3.60906 51.9389 2.75718 47.2481 3.05937C47.3182 3.29536 47.3686 3.53999 47.3966 3.79325C50.4258 3.9429 52.278 4.71419 52.575 5.86537C53.057 7.71589 49.2685 10.6313 42.3443 13.7308C41.7166 6.0179 35.4061 -0.0286772 27.7394 0.000102307C20.3276 0.0288818 14.2273 5.72147 13.3082 13.0718C4.34966 17.9441 -1.13699 22.8885 0.199647 25.9391C1.19162 28.204 6.63343 29.0271 15.2557 27.1191C15.1492 26.9291 15.0512 26.7219 14.9699 26.5147C8.07655 27.591 3.66873 26.7737 3.21198 25.3175C2.62913 23.4554 6.68667 20.4221 13.8995 17.2477L13.9079 17.2419C16.088 16.2778 23.906 12.9365 33.1504 10.45C33.2625 10.4183 33.3269 10.5881 33.2232 10.637C24.7074 14.6863 18.8481 18.9917 17.8337 22.2812C16.5251 26.5233 21.9613 30.0229 27.8459 29.9999C34.77 29.974 40.5537 25.0009 42.0305 18.3528C51.2552 13.4027 56.9464 8.34329 55.5874 5.24085H55.5902Z" fill="#F03E3E"/>
-    </g>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M36.1283 33.736C36.1274 33.7355 36.1267 33.7353 36.1267 33.7353C36.122 33.7353 36.1211 33.7353 36.1283 33.736Z" fill="#FFD300"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.20813 33.196C3.20835 33.1958 3.2097 33.1933 3.2097 33.1933C3.20274 33.1824 3.19938 33.1792 3.20813 33.196Z" fill="#FFD300"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M39.5146 29.8469H44.9269V35.3626H48.3019V39.1436H44.8917V47.4481C44.856 48.5791 44.856 49.5332 46.3061 49.5332L48.2517 49.4626V53.7032C47.0842 53.8803 46.377 53.986 45.3872 53.986C43.5114 53.986 41.4599 53.8803 40.2927 52.1833C39.55 51.088 39.5146 49.7806 39.5146 48.0137V39.1085H36.8257V35.3579H39.5146V29.8469Z" fill="#FEFEFE"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M36.181 33.7355C36.1801 33.7355 36.1801 33.736 36.1794 33.736C36.1864 33.736 36.1851 33.736 36.181 33.7355Z" fill="#FFD300"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.1187 20.5935V20.5962C20.1382 20.5805 20.1332 20.5836 20.1187 20.5935Z" fill="#FFD300"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.9883 20.759C19.9851 20.7866 20.0172 20.7559 19.9883 20.759V20.759Z" fill="#FFD300"/>
-    <text x="24.5" y="30" font-family="'Dancing Script', cursive" font-size="38" font-style="italic" fill="#FFD300" text-anchor="middle">la</text>
-    <text x="24.5" y="70" font-family="'Caveat', cursive" font-size="8" font-style="italic" fill="#FFD300" text-anchor="middle">ArianeGroup</text>
-    <text x="60" y="28" font-family="DM Sans, sans-serif" font-size="16" font-weight="400" font-style="italic" fill="#FFD300">Issac</text>
-    <text x="60" y="46" font-family="DM Sans, sans-serif" font-size="16" font-weight="400" font-style="italic" fill="#FFD300">Brest</text>
-    <text x="60" y="64" font-family="DM Sans, sans-serif" font-size="16" font-weight="400" font-style="italic" fill="#FFD300">Bisca</text>
-</svg>
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Accueil</a></li>
-      <li><a href="tracts.html">Tracts</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </nav>
+<header class="wrap">
+  <h1>Le futur site de la CGT ArianeGroup : à vous de choisir</h1>
+  <p class="intro">Trois propositions de design ont été préparées pour le site du syndicat. Prenez quelques minutes pour les parcourir, puis donnez votre avis en bas de page.</p>
+  <ol class="steps">
+    <li><b>1.</b> Ouvrez chaque proposition</li>
+    <li><b>2.</b> Regardez les pages Accueil, Tracts et Contact</li>
+    <li><b>3.</b> <a href="#avis">Donnez votre avis</a></li>
+  </ol>
+</header>
 
-  <section class="hero">
-    <p class="hero-eyebrow">✊ CGT ArianeGroup — Issac Brest Biscarosse</p>
-    <h1 class="hero-title">
-      Ensemble,
-      <em>plus forts.</em>
-    </h1>
-    <p class="hero-desc">
-      Nous défendons les droits des travailleurs au quotidien. Retrouvez ici nos tracts, nos actualités et comment nous rejoindre ou nous contacter.
-    </p>
-    <div class="hero-cta">
-      <a href="tracts.html" class="btn-primary">Voir nos tracts →</a>
-      <a href="contact.html" class="btn-secondary">Nous contacter</a>
-    </div>
-  </section>
+<main class="wrap">
+  <div class="grid">
 
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <span class="marquee-item"><span>✊</span>SOLIDARITÉ</span>
-      <span class="marquee-item"><span>⚡</span>ACTION</span>
-      <span class="marquee-item"><span>🛡</span>PROTECTION</span>
-      <span class="marquee-item"><span>📣</span>MOBILISATION</span>
-      <span class="marquee-item"><span>✊</span>SOLIDARITÉ</span>
-      <span class="marquee-item"><span>⚡</span>ACTION</span>
-      <span class="marquee-item"><span>🛡</span>PROTECTION</span>
-      <span class="marquee-item"><span>📣</span>MOBILISATION</span>
-      <span class="marquee-item"><span>✊</span>SOLIDARITÉ</span>
-      <span class="marquee-item"><span>⚡</span>ACTION</span>
-      <span class="marquee-item"><span>🛡</span>PROTECTION</span>
-      <span class="marquee-item"><span>📣</span>MOBILISATION</span>
-    </div>
+    <article class="card">
+      <a class="thumb" href="a-accueil.html" aria-label="Ouvrir la proposition A, Imprimerie">
+        <iframe src="a-accueil.html" title="Aperçu de la proposition A" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+      </a>
+      <div class="card-body">
+        <h2>A · Imprimerie</h2>
+        <p>Fond clair couleur papier, noir et rouge, grosse typographie d'affiche. Sections numérotées comme un tract imprimé. La plus sobre et la plus lisible.</p>
+        <div class="links">
+          <a class="main" href="a-accueil.html">Accueil</a>
+          <a href="a-tracts.html">Tracts</a>
+          <a href="a-contact.html">Contact</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a class="thumb" href="b-accueil.html" aria-label="Ouvrir la proposition B, Nuit militante">
+        <iframe src="b-accueil.html" title="Aperçu de la proposition B" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+      </a>
+      <div class="card-body">
+        <h2>B · Nuit militante</h2>
+        <p>Fond noir, rouge vif, jaune réservé aux dates et aux consultations. Grands titres serrés, ton direct. La plus combative.</p>
+        <div class="links">
+          <a class="main" href="b-accueil.html">Accueil</a>
+          <a href="b-tracts.html">Tracts</a>
+          <a href="b-contact.html">Contact</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a class="thumb" href="c-accueil.html" aria-label="Ouvrir la proposition C, Bulletin ouvrier">
+        <iframe src="c-accueil.html" title="Aperçu de la proposition C" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+      </a>
+      <div class="card-body">
+        <h2>C · Bulletin ouvrier</h2>
+        <p>Style journal syndical : grand titre de une, colonne principale et colonne latérale. La plus confortable pour lire des textes longs.</p>
+        <div class="links">
+          <a class="main" href="c-accueil.html">Accueil</a>
+          <a href="c-tracts.html">Tracts</a>
+          <a href="c-contact.html">Contact</a>
+        </div>
+      </div>
+    </article>
+
   </div>
 
-  <div class="section">
-    <p class="section-label">Ce que nous faisons</p>
-    <h2 class="section-title">Notre engagement,<br>chaque jour</h2>
-    <div class="cards">
-      <div class="card">
-        <span class="card-icon">📋</span>
-        <h3>Défense des droits</h3>
-        <p>Accompagnement individuel, négociation collective, présence en réunions. Nous sommes là quand vous en avez besoin.</p>
+  <p class="note"><strong>À savoir :</strong> ce sont des maquettes. Les textes entre crochets [comme ceci] seront remplacés par les vrais contenus, le logo sera le logo officiel, et les boutons des formulaires ne fonctionnent pas encore. Jugez surtout l'ambiance, les couleurs, la lisibilité et l'organisation des pages.</p>
+</main>
+
+<section id="avis">
+  <div class="wrap">
+    <h2>Votre avis</h2>
+    <p style="margin:0;color:#333;max-width:720px">Tout est facultatif. Le bouton « Envoyer » ouvre votre messagerie avec votre avis déjà rédigé : il n'y a plus qu'à cliquer sur Envoyer. Si rien ne s'ouvre, utilisez « Copier mon avis » et collez-le dans un email.</p>
+
+    <form id="form-avis" novalidate>
+      <label class="field">Votre prénom <span class="hint">facultatif</span>
+        <input type="text" name="prenom" autocomplete="given-name">
+      </label>
+
+      <fieldset>
+        <legend>Quelle proposition préférez-vous ?</legend>
+        <div class="choices">
+          <label><input type="radio" name="choix" value="A · Imprimerie"> A · Imprimerie</label>
+          <label><input type="radio" name="choix" value="B · Nuit militante"> B · Nuit militante</label>
+          <label><input type="radio" name="choix" value="C · Bulletin ouvrier"> C · Bulletin ouvrier</label>
+          <label><input type="radio" name="choix" value="Un mélange"> Un mélange de plusieurs</label>
+        </div>
+      </fieldset>
+
+      <label class="field">Ce qui vous plaît <span class="hint">dans celle que vous préférez, ou dans les autres</span>
+        <textarea name="plait" rows="4"></textarea>
+      </label>
+
+      <label class="field">Ce qu'il faudrait changer <span class="hint">couleurs, lisibilité, organisation, ce qui manque…</span>
+        <textarea name="changer" rows="4"></textarea>
+      </label>
+
+      <label class="field">Autres remarques <span class="hint">contenu, rubriques, idées pour le site</span>
+        <textarea name="autres" rows="3"></textarea>
+      </label>
+
+      <div class="actions">
+        <button type="submit" class="primary">Envoyer mon avis par email</button>
+        <button type="button" id="copier">Copier mon avis</button>
       </div>
-      <div class="card">
-        <span class="card-icon">📰</span>
-        <h3>Tracts & informations</h3>
-        <p>Chaque semaine, nous publions des tracts pour vous tenir informés des dernières actualités sociales et de nos actions.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">🤝</span>
-        <h3>Rejoindre le syndicat</h3>
-        <p>Adhérer, c'est peser collectivement. Plus nous sommes nombreux, plus notre voix compte dans les négociations.</p>
-      </div>
-    </div>
+      <p id="status" role="status"></p>
+    </form>
   </div>
+</section>
 
-  <div class="section rss-section">
-    <p class="section-label">Sur le web</p>
-    <h2 class="section-title">Actualités syndicales</h2>
-    <div class="rss-grid" id="rss-grid">
-      <div class="rss-loading">Chargement des actualités...</div>
-    </div>
-  </div>
+<footer class="wrap">Page de consultation interne — CGT ArianeGroup</footer>
 
-  <footer>
-    <p>© 2026 CGT ArianeGroup Issac Brest Biscarosse — Tous droits réservés</p>
-    <p><a href="contact.html">david.da-silva@ariane.group</a></p>
-  </footer>
+<script>
+  // ⬇️ Adresse qui reçoit les avis : à remplacer avant de publier
+  var EMAIL_AVIS = "VOTRE-EMAIL@exemple.fr";
 
-  <script>
-  (function() {
-    const feeds = [
-      { url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.cgt.fr/rss.xml', title: 'Site National CGT', logo: 'https://www.cgt.fr/themes/bluedrop/svg/logo.svg' },
-      { url: 'https://api.rss2json.com/v1/api.json?rss_url=http://feeds.feedburner.com/UGICT-CGT-ActusGenerales', title: 'Site National UGICT' },
-      { url: 'https://api.rss2json.com/v1/api.json?rss_url=https://ftm-cgt.fr/feed/', title: 'Metallurgie CGT' }
+  var form = document.getElementById('form-avis');
+  var status = document.getElementById('status');
+
+  function texteAvis() {
+    var d = new FormData(form);
+    var lignes = [
+      'Prénom : ' + (d.get('prenom') || '—'),
+      'Proposition préférée : ' + (d.get('choix') || '—'),
+      '',
+      'Ce qui me plaît :',
+      d.get('plait') || '—',
+      '',
+      'Ce qu\'il faudrait changer :',
+      d.get('changer') || '—',
+      '',
+      'Autres remarques :',
+      d.get('autres') || '—'
     ];
+    return lignes.join('\n');
+  }
 
-    function formatDate(dateStr) {
-      if (!dateStr) return '';
-      const d = new Date(dateStr);
-      if (isNaN(d)) return '';
-      return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var sujet = 'Avis design site CGT' + (form.choix.value ? ' — ' + form.choix.value : '');
+    window.location.href = 'mailto:' + EMAIL_AVIS +
+      '?subject=' + encodeURIComponent(sujet) +
+      '&body=' + encodeURIComponent(texteAvis());
+    status.textContent = 'Votre messagerie devrait s\'ouvrir. Sinon, cliquez sur « Copier mon avis » et envoyez-le à ' + EMAIL_AVIS + '.';
+  });
+
+  document.getElementById('copier').addEventListener('click', function () {
+    var t = texteAvis();
+    var done = function () { status.textContent = 'Avis copié. Collez-le dans un email à ' + EMAIL_AVIS + '.'; };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(t).then(done, function () { fallback(t); });
+    } else { fallback(t); }
+    function fallback(txt) {
+      var ta = document.createElement('textarea');
+      ta.value = txt; ta.setAttribute('readonly', ''); ta.style.position = 'absolute'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (err) { status.textContent = 'Impossible de copier automatiquement. Envoyez votre avis à ' + EMAIL_AVIS + '.'; }
+      document.body.removeChild(ta);
     }
-
-    async function loadFeeds() {
-      const grid = document.getElementById('rss-grid');
-      grid.innerHTML = '';
-
-      const results = await Promise.allSettled(
-        feeds.map(f => fetch(f.url).then(r => r.json()))
-      );
-
-      let hasAny = false;
-      results.forEach((result, idx) => {
-        if (result.status === 'fulfilled' && result.value.status === 'ok') {
-          hasAny = true;
-          const data = result.value;
-          const feed = data.feed;
-          const items = data.items.slice(0, 4);
-
-          const col = document.createElement('div');
-          col.className = 'rss-feed';
-
-          const logo = feeds[idx].logo || feed.image;
-          const imgHtml = logo ? `<img src="${logo}" alt="" loading="lazy">` : '';
-          col.innerHTML = `
-            <div class="rss-feed-header">
-              ${imgHtml}
-              <h3>${feeds[idx].title}</h3>
-            </div>
-          `;
-
-          items.forEach(item => {
-            const a = document.createElement('a');
-            a.className = 'rss-item';
-            a.href = item.link;
-            a.target = '_blank';
-            a.rel = 'noopener';
-            a.innerHTML = `
-              <span class="rss-item-title">${item.title}</span>
-              <span class="rss-item-date">${formatDate(item.pubDate)}</span>
-            `;
-            col.appendChild(a);
-          });
-
-          grid.appendChild(col);
-        }
-      });
-
-      if (!hasAny) {
-        grid.innerHTML = '<div class="rss-error">Impossible de charger les actualités pour le moment.</div>';
-      }
-    }
-
-    loadFeeds();
-  })();
-  </script>
-
+  });
+</script>
 </body>
 </html>
